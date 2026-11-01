@@ -4,6 +4,8 @@ setlocal EnableExtensions
 title Chanh Dien Online - Bear
 set "ROOT=%~dp0"
 set "LIVE=%~dp0live"
+rem Dia chi IP may nay trong mang LAN (xem bang lenh ipconfig). De trong neu chi dung tren may nay.
+set "LAN_IP=192.168.100.208"
 
 where node >nul 2>nul
 if errorlevel 1 (
@@ -36,7 +38,7 @@ echo [2/3] Dang mo server LIVE tai http://localhost:3000 ...
 start "Chanh Dien LIVE" /D "%LIVE%" cmd /k npm start
 
 echo [3/3] Dang mo web tinh tai http://localhost:4173 ...
-start "Chanh Dien Web" /D "%ROOT%" cmd /k npx --yes serve . -l 4173
+start "Chanh Dien Web" /D "%ROOT%" cmd /k npx --yes serve . -l tcp://0.0.0.0:4173
 
 timeout /t 3 /nobreak >nul
 start "" "http://localhost:4173"
@@ -47,6 +49,13 @@ echo Da mo xong.
 echo Web:     http://localhost:4173
 echo Control: http://localhost:3000/live/control.html
 echo Overlay: http://localhost:3000/live/overlay.html
+if defined LAN_IP (
+  echo.
+  echo Tu may khac trong mang LAN:
+  echo Web:     http://%LAN_IP%:4173
+  echo Control: http://%LAN_IP%:3000/live/control.html
+  echo Overlay: http://%LAN_IP%:3000/live/overlay.html
+)
 echo Dong hai cua so server de dung ung dung.
 timeout /t 5 /nobreak >nul
 endlocal
