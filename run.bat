@@ -6,6 +6,9 @@ set "ROOT=%~dp0"
 set "LIVE=%~dp0live"
 rem Dia chi IP may nay trong mang LAN (xem bang lenh ipconfig). De trong neu chi dung tren may nay.
 set "LAN_IP=192.168.100.208"
+rem Ten mien mien phi tu tro ve IP tren: nip.io (du phong: sslip.io). Chi dung trong mang LAN.
+set "LAN_HOSTS="
+if defined LAN_IP set "LAN_HOSTS=%LAN_IP%,%LAN_IP%.nip.io,%LAN_IP%.sslip.io"
 
 where node >nul 2>nul
 if errorlevel 1 (
@@ -52,9 +55,10 @@ echo Overlay: http://localhost:3000/live/overlay.html
 if defined LAN_IP (
   echo.
   echo Tu may khac trong mang LAN:
-  echo Web:     http://%LAN_IP%:4173
-  echo Control: http://%LAN_IP%:3000/live/control.html
-  echo Overlay: http://%LAN_IP%:3000/live/overlay.html
+  echo Web:     http://%LAN_IP%.nip.io:4173
+  echo Control: http://%LAN_IP%.nip.io:3000/live/control.html
+  echo Overlay: http://%LAN_IP%.nip.io:3000/live/overlay.html
+  echo Neu nip.io khong vao duoc, thay bang %LAN_IP%.sslip.io hoac %LAN_IP%
 )
 echo Dong hai cua so server de dung ung dung.
 timeout /t 5 /nobreak >nul

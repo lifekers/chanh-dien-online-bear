@@ -252,9 +252,9 @@ function setBots(on, n, pace){
 //    same browser cannot send control commands
 //  • static files: only /assets and /live, no dot-files, no node_modules, no server source, no path escapes
 //  • no TikTok password, cookie or session is ever used or stored; only public room events are read
-// LAN_IP=192.168.100.208 (comma-separated) opens the server to the local network for those IPs only;
-// the Host/Origin checks still reject any other hostname.
-const LAN_IPS = String(process.env.LAN_IP || '').split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
+// LAN_HOSTS (or LAN_IP)=192.168.100.208,192.168.100.208.nip.io (comma-separated) opens the server to the
+// local network for those names only; the Host/Origin checks still reject any other hostname.
+const LAN_IPS = String(process.env.LAN_HOSTS || process.env.LAN_IP || '').split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
 const HOST = process.env.HOST || (LAN_IPS.length ? '0.0.0.0' : '127.0.0.1');
 const MIME = { '.html':'text/html; charset=utf-8', '.js':'text/javascript', '.css':'text/css', '.json':'application/json',
   '.png':'image/png', '.jpg':'image/jpeg', '.webp':'image/webp', '.mp3':'audio/mpeg', '.svg':'image/svg+xml', '.ico':'image/x-icon' };

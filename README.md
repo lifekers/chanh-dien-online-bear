@@ -17,13 +17,15 @@ Nhấp đúp `run.bat` ở thư mục gốc. File sẽ tự cài dependency nế
 
 ## Dùng trong mạng LAN
 
-`run.bat` đặt sẵn `LAN_IP=192.168.100.208`. Sửa dòng `set "LAN_IP=..."` cho đúng IPv4 của máy (xem bằng lệnh `ipconfig`), hoặc để trống nếu chỉ dùng trên máy này. Khi chạy thủ công thì dùng `set LAN_IP=192.168.100.208 && npm start` trong thư mục `live`.
+`run.bat` đặt sẵn `LAN_IP=192.168.100.208`. Sửa dòng `set "LAN_IP=..."` cho đúng IPv4 của máy (xem bằng lệnh `ipconfig`), hoặc để trống nếu chỉ dùng trên máy này. 
 
-Máy khác cùng mạng mở các địa chỉ sau:
+Máy khác cùng mạng mở các địa chỉ sau (tên miền miễn phí [nip.io](https://nip.io) tự trỏ về IP, không cần đăng ký):
 
-- Web: `http://192.168.100.208:4173`
-- Bảng điều khiển: `http://192.168.100.208:3000/live/control.html`
-- Overlay: `http://192.168.100.208:3000/live/overlay.html`
+- Web: `http://192.168.100.208.nip.io:4173`
+- Bảng điều khiển: `http://192.168.100.208.nip.io:3000/live/control.html`
+- Overlay: `http://192.168.100.208.nip.io:3000/live/overlay.html`
+
+`run.bat` tự cho phép cả `IP`, `IP.nip.io` và `IP.sslip.io`. Nếu router chặn nip.io (một số router chặn tên miền trỏ về IP nội bộ), dùng `192.168.100.208.sslip.io` hoặc gõ thẳng IP. Khi chạy thủ công: `set LAN_HOSTS=192.168.100.208,192.168.100.208.nip.io && npm start`.
 
 Server chỉ chấp nhận các tên host `localhost` và IP đã khai báo. Bảng điều khiển không có đăng nhập, nên ai trong mạng LAN cũng điều khiển được. Chỉ bật trong mạng tin cậy. Nếu Windows Firewall hỏi thì chọn **Allow** cho mạng *Private*.
 
