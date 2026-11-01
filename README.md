@@ -25,7 +25,9 @@ Máy khác cùng mạng mở các địa chỉ sau (tên miền miễn phí [nip
 - Bảng điều khiển: `http://192.168.100.208.nip.io:3000/live/control.html`
 - Overlay: `http://192.168.100.208.nip.io:3000/live/overlay.html`
 
-`run.bat` tự cho phép cả `IP`, `IP.nip.io` và `IP.sslip.io`. Nếu router chặn nip.io (một số router chặn tên miền trỏ về IP nội bộ), dùng `192.168.100.208.sslip.io` hoặc gõ thẳng IP. Khi chạy thủ công: `set LAN_HOSTS=192.168.100.208,192.168.100.208.nip.io && npm start`.
+`run.bat` tự cho phép `IP`, `IP.nip.io`, `IP.sslip.io`, tên dễ nhớ `chanhdien-192-168-100-208.sslip.io` và các tên trong `LAN_NAMES` (mặc định `chanhdien.duckdns.org`).
+
+Muốn tên ngắn không chứa IP: tạo miễn phí tại [duckdns.org](https://www.duckdns.org) (đăng nhập, tạo subdomain `chanhdien`, ô *current ip* nhập `192.168.100.208`, bấm *update ip*), rồi vào `http://chanhdien.duckdns.org:4173`. Đổi tên thì sửa dòng `set "LAN_NAMES=..."` trong `run.bat`. Nếu router chặn nip.io (một số router chặn tên miền trỏ về IP nội bộ), dùng `192.168.100.208.sslip.io` hoặc gõ thẳng IP. Khi chạy thủ công: `set LAN_HOSTS=192.168.100.208,192.168.100.208.nip.io && npm start`.
 
 Server chỉ chấp nhận các tên host `localhost` và IP đã khai báo. Bảng điều khiển không có đăng nhập, nên ai trong mạng LAN cũng điều khiển được. Chỉ bật trong mạng tin cậy. Nếu Windows Firewall hỏi thì chọn **Allow** cho mạng *Private*.
 
